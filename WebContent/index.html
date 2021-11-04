@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estiloform.css">
+    <title>Formulario de Login</title>
+    <script src="js/valform.js" defer></script>
+</head>
+<body>
+    
+    <form action="login" method="post" id="formulario">
+        <label for="correo">Correo: </label>
+        <input type="email" name="email" id="correo">
+        <label for="password">Password: </label>
+        <input type="password" name="pass" id="pass">
+        <input type="submit" value="Login">
+        <span id="err"></span>
+    </form>
+
+</body>
+</html>
