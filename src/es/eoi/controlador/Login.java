@@ -2,6 +2,7 @@ package es.eoi.controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,12 +55,66 @@ public class Login extends HttpServlet {
 		
 		if (alu != null) {
 			sesion.setAttribute("alumno", alu);
-			
 			Alumno alusesion = (Alumno)sesion.getAttribute("alumno");
+			List<Alumno> listado = ar.findAll();
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
+			out.println("<head>");
+			out.println("<style>");
+			out.println("table, th, td { border: 1px solid black; }");
+			out.println("</style>");
+			out.println("</head>");
 			out.println("<body>");
 			out.println("<h1> Bienvenido " + alusesion.getNombre() + " " + alusesion.getApellidos() + "</h1>");
+			out.println("<br>");
+			out.println("<table>");
+			// cabecera >>
+			out.println("<tr>");
+			out.println("<th>");
+			out.println("dni");
+			out.println("</th>");
+			out.println("<th>");
+			out.println("nombre");
+			out.println("</th>");
+			out.println("<th>");
+			out.println("apellidos");
+			out.println("</th>");
+			out.println("<th>");
+			out.println("edad");
+			out.println("</th>");
+			out.println("<th>");
+			out.println("email");
+			out.println("</th>");
+			out.println("<th>");
+			out.println("pass");
+			out.println("</th>");
+			out.println("</tr>");
+			// cabecera <<
+			
+			for (Alumno a : listado) {
+				out.println("<tr>");
+				out.println("<td>");
+				out.println(a.getDni());
+				out.println("</td>");
+				out.println("<td>");
+				out.println(a.getNombre());
+				out.println("</td>");
+				out.println("<td>");
+				out.println(a.getApellidos());
+				out.println("</td>");
+				out.println("<td>");
+				out.println(a.getEdad());
+				out.println("</td>");
+				out.println("<td>");
+				out.println(a.getEmail());
+				out.println("</td>");
+				out.println("<td>");
+				out.println(a.getPass());
+				out.println("</td>");
+				out.println("</tr>");
+			}
+			
+			out.println("</table>");
 			out.println("<br>");
 			out.println("<a href='logout'>Cerrar sesion</a>");
 			out.println("</body>");

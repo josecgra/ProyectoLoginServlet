@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import es.eoi.modelo.Alumno;
 
@@ -54,6 +57,30 @@ public class AlumnoRepository {
 		}
 		
 		return alu;
+	}
+	
+	public List<Alumno> findAll() {
+
+		List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+		Connection con = openConnection();
+		Alumno alu = null;
+		String sql = "SELECT * FROM alumno";
+
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+				alu = new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"),
+						rs.getInt("edad"), rs.getString("email"),rs.getString("pass"));
+				listaAlumnos.add(alu);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("ERROR al recuperar todos los alumnos " + e.getMessage());
+		}
+
+		return listaAlumnos;
 	}
 	
 }
