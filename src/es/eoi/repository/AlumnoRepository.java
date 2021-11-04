@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import es.eoi.modelo.Alumno;
+
 public class AlumnoRepository {
 	
 	private Connection openConnection() {
@@ -29,8 +31,8 @@ public class AlumnoRepository {
 		return con;
 	}
 	
-	public boolean login(String email, String pass) {
-		boolean logado = false;
+	public Alumno login(String email, String pass) {
+		Alumno alu = null;
 		Connection con = openConnection();
 		
 		String sql = "SELECT * FROM alumno WHERE email = ? AND pass = ?";
@@ -43,7 +45,7 @@ public class AlumnoRepository {
 			ResultSet rs = pst.executeQuery();
 			
 			while (rs.next()) {
-				logado = true;
+				alu = new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getInt("edad"), rs.getString("email"), rs.getString("pass"));
 			}
 			
 			
@@ -51,7 +53,7 @@ public class AlumnoRepository {
 			e.printStackTrace();
 		}
 		
-		return logado;
+		return alu;
 	}
 	
 }

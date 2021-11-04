@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import es.eoi.modelo.Alumno;
 import es.eoi.repository.AlumnoRepository;
 
 /**
@@ -41,27 +43,36 @@ public class Login extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
-		String mensaje = "";
 		
 		AlumnoRepository ar = new AlumnoRepository();
+		Alumno alu = ar.login(email, pass);
 		
-		
-		if (ar.login(email, pass)) {
-			mensaje = "El usuario existe en la BBDD";
-		} else {
-			mensaje = "El usuario NO existe en la BBDD";
-		}
+		HttpSession sesion = request.getSession();
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<body>");
-		out.println("<h1>" + mensaje + "</h1>");
-		out.println("</body>");
-		out.println("</html>");
 		
-		
+		if (alu != null) {
+			sesion.setAttribute("alumno", alu);
+			
+			Alumno alusesion = (Alumno)sesion.getAttribute("alumno");
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<body>");
+			out.println("<h1> Bienvenido " + alusesion.getNombre() + " " + alusesion.getApellidos() + "</h1>");
+			out.println("<br>");
+			out.println("<a href='logout'>Cerrar sesion</a>");
+			out.println("</body>");
+			out.println("</html>");
+		} else {
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<body>");
+			out.println("<h1> El usuario no existe en la BBDD</h1>");
+			out.println("<a href='index.html'>Reintentar</a>");
+			out.println("</body>");
+			out.println("</html>");
+		}
 	}
 
 }
