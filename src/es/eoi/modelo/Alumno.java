@@ -8,9 +8,10 @@ public class Alumno {
 	private int edad;
 	private String email;
 	private String pass;
+	private String rol;
 	
 	
-	public Alumno(String dni, String nombre, String apellidos, int edad, String email, String pass) {
+	public Alumno(String dni, String nombre, String apellidos, int edad, String email, String pass, String rol) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -18,6 +19,7 @@ public class Alumno {
 		this.edad = edad;
 		this.email = email;
 		this.pass = pass;
+		this.rol = rol;
 	}
 
 
@@ -78,6 +80,16 @@ public class Alumno {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+
+	public String getRol() {
+		return rol;
+	}
+
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 	
 	

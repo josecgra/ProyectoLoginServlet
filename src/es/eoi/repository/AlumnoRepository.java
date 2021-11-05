@@ -48,7 +48,7 @@ public class AlumnoRepository {
 			ResultSet rs = pst.executeQuery();
 			
 			while (rs.next()) {
-				alu = new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getInt("edad"), rs.getString("email"), rs.getString("pass"));
+				alu = new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getInt("edad"), rs.getString("email"), rs.getString("pass"), rs.getString("rol"));
 			}
 			
 			
@@ -72,7 +72,7 @@ public class AlumnoRepository {
 
 			while (rs.next()) {
 				alu = new Alumno(rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"),
-						rs.getInt("edad"), rs.getString("email"),rs.getString("pass"));
+						rs.getInt("edad"), rs.getString("email"),rs.getString("pass"), rs.getString("rol"));
 				listaAlumnos.add(alu);
 			}
 
@@ -82,5 +82,7 @@ public class AlumnoRepository {
 
 		return listaAlumnos;
 	}
+	
+
 	
 }

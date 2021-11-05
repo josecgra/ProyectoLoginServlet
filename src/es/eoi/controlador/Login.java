@@ -88,6 +88,9 @@ public class Login extends HttpServlet {
 			out.println("<th>");
 			out.println("pass");
 			out.println("</th>");
+			out.println("<th>");
+			out.println("rol");
+			out.println("</th>");
 			out.println("</tr>");
 			// cabecera <<
 			
@@ -111,11 +114,17 @@ public class Login extends HttpServlet {
 				out.println("<td>");
 				out.println(a.getPass());
 				out.println("</td>");
+				out.println("<td>");
+				out.println(a.getRol());
+				out.println("</td>");
 				out.println("</tr>");
 			}
 			
 			out.println("</table>");
 			out.println("<br>");
+			if (alu.getRol().equals("admin")) {
+				out.println("<a href='alta.html'>Alta de alumno</a>");
+			}
 			out.println("<a href='logout'>Cerrar sesion</a>");
 			out.println("</body>");
 			out.println("</html>");
