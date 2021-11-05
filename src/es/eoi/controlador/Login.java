@@ -123,7 +123,7 @@ public class Login extends HttpServlet {
 			out.println("</table>");
 			out.println("<br>");
 			if (alu.getRol().equals("admin")) {
-				out.println("<a href='alta.html'>Alta de alumno</a>");
+				out.println("<a href='alta.jsp'>Alta de alumno</a>");
 			}
 			out.println("<a href='logout'>Cerrar sesion</a>");
 			out.println("</body>");

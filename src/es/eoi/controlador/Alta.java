@@ -48,6 +48,7 @@ public class Alta extends HttpServlet {
 		String pass = request.getParameter("pass");
 		String rol = request.getParameter("rol");
 		
+		String mensaje = "";
 		String pagina = "index.html";	
 		
 		if (rol.equals("admin") || rol.equals("visitante")) {
@@ -56,8 +57,18 @@ public class Alta extends HttpServlet {
 			AlumnoRepository ar = new AlumnoRepository();
 			ar.alta(alu);
 		} else {
-			pagina="alta.html";
+			mensaje="Rol incorrecto, solo validos (admin) y (visitante)";
+			request.setAttribute("msgerr", mensaje);
+			pagina="alta.jsp";
 		}
+		
+		// valido que el email dado de alta solo pueda ser con @gmail.com
+		if (!email.contains("@gmail.com")) {
+			mensaje="Email incorrecto, solo son válidos los @gmail.com";
+			request.setAttribute("msgerr", mensaje);
+			pagina="alta.jsp";
+		}
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher(pagina);
 		rd.forward(request, response);
