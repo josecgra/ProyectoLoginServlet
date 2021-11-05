@@ -83,6 +83,39 @@ public class AlumnoRepository {
 		return listaAlumnos;
 	}
 	
+	public boolean alta(Alumno alu) {
+
+		Connection con = openConnection();
+		boolean creado = false;
+		String sql = "INSERT INTO alumno VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+		if (alu != null) {
+
+			try {
+				PreparedStatement pst = con.prepareStatement(sql);
+				pst.setString(1, alu.getDni());
+				pst.setString(2, alu.getNombre());
+				pst.setString(3, alu.getApellidos());
+				pst.setInt(4, alu.getEdad());
+				pst.setString(5, alu.getEmail());
+				pst.setString(6, alu.getPass());
+				pst.setString(7, alu.getRol());
+
+				int i = pst.executeUpdate();
+
+				if (i > 0) {
+					creado = true;
+				}
+
+			} catch (SQLException e) {
+				System.err.println("ERROR al crear el Alumno en la BBDD " + e.getMessage());
+			}
+
+		}
+
+		return creado;
+	}
+	
 
 	
 }
